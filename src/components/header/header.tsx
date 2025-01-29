@@ -1,7 +1,4 @@
+import classes from './header.module.css';
 export function Header() {
-  return (
-    <header>
-      <h1>My App</h1>
-    </header>
-  );
+  return <header className={classes.header}>My App</header>;
 }
