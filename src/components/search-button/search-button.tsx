@@ -1,8 +1,13 @@
 import { Component } from 'react';
-import classes from './search-button.module.css';
 
-export class SearchButton extends Component {
+interface SearchButtonProps {
+  onClick: () => void;
+}
+
+class SearchButton extends Component<SearchButtonProps> {
   render() {
-    return <button className={classes.button}>Search</button>;
+    return <button onClick={this.props.onClick}>Search</button>;
   }
 }
+
+export default SearchButton;
