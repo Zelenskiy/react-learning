@@ -1,7 +1,7 @@
 import { Pokemon } from './types';
 
 interface ApiResponse {
-  results: { name: string; url: string }[];
+  results: Pokemon[];
   count: number;
 }
 
@@ -12,7 +12,7 @@ export const fetchPokemons = async (
   const limit = 4;
   const offset = (currentPage - 1) * limit;
   const url = searchTerm
-    ? `https://pokeapi.co/api/v2/pokemon/${searchTerm}`
+    ? `https://pokeapi.co/api/v2/${searchTerm}?offset=${offset}&limit=${limit}`
     : `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
   try {
@@ -21,15 +21,6 @@ export const fetchPokemons = async (
       throw new Error('Failed to fetch data');
     }
     const data: ApiResponse | Pokemon = await response.json();
-
-    if (searchTerm) {
-      return {
-        pokemons: [
-          { name: (data as Pokemon).name, url: (data as Pokemon).url },
-        ],
-        totalPages: 1,
-      };
-    }
 
     return {
       pokemons: (data as ApiResponse).results,
