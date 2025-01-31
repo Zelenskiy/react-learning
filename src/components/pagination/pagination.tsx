@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classes from './pagination.module.css';
 
 interface PaginationProps {
   currentPage: number;
@@ -24,7 +25,7 @@ class Pagination extends Component<PaginationProps> {
   render() {
     const { currentPage, totalPages } = this.props;
     return (
-      <div className="pagination">
+      <div className={classes.pagination}>
         <button onClick={this.handlePrev} disabled={currentPage === 1}>
           Prev
         </button>
