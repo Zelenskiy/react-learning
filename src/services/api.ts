@@ -11,22 +11,27 @@ export const fetchPokemons = async (
 ): Promise<{ pokemons: Pokemon[]; totalPages: number }> => {
   const limit = 10;
   const offset = (currentPage - 1) * limit;
-  const url =
-    searchTerm && searchTerm != ''
-      ? `https://pokeapi.co/api/v2/${searchTerm}?offset=${offset}&limit=${limit}`
-      : `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+  const baseUrl = 'https://pokeapi.co/api/v2/pokemon?limit=2000';
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(baseUrl);
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
-    const data: ApiResponse | Pokemon = await response.json();
+    const data: ApiResponse = await response.json();
 
-    return {
-      pokemons: (data as ApiResponse).results,
-      totalPages: Math.ceil((data as ApiResponse).count / limit),
-    };
+    let filteredPokemons = data.results;
+
+    if (searchTerm.trim()) {
+      filteredPokemons = filteredPokemons.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    const totalPages = Math.ceil(filteredPokemons.length / limit);
+    const paginatedPokemons = filteredPokemons.slice(offset, offset + limit);
+
+    return { pokemons: paginatedPokemons, totalPages };
   } catch (error) {
     console.error('Error fetching Pokémon data:', error);
     return { pokemons: [], totalPages: 1 };
