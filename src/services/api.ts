@@ -9,11 +9,12 @@ export const fetchPokemons = async (
   searchTerm: string,
   currentPage: number
 ): Promise<{ pokemons: Pokemon[]; totalPages: number }> => {
-  const limit = 4;
+  const limit = 10;
   const offset = (currentPage - 1) * limit;
-  const url = searchTerm
-    ? `https://pokeapi.co/api/v2/${searchTerm}?offset=${offset}&limit=${limit}`
-    : `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+  const url =
+    searchTerm && searchTerm != ''
+      ? `https://pokeapi.co/api/v2/${searchTerm}?offset=${offset}&limit=${limit}`
+      : `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
   try {
     const response = await fetch(url);

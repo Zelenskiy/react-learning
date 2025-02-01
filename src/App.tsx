@@ -7,12 +7,14 @@ import Pagination from './components/pagination/pagination';
 import CardList from './components/cardlist/cardlist';
 import Search from './components/search/search';
 import { Footer } from './components/footer/footer';
+import ErrorBoundary from './components/errorboundary/errorBoundary';
 
 interface AppState {
   searchTerm: string;
   pokemons: Pokemon[];
   currentPage: number;
   totalPages: number;
+  throwError: boolean;
 }
 
 class App extends Component<object, AppState> {
@@ -21,6 +23,7 @@ class App extends Component<object, AppState> {
     pokemons: [],
     currentPage: 1,
     totalPages: 1,
+    throwError: false,
   };
 
   componentDidMount() {
@@ -48,19 +51,26 @@ class App extends Component<object, AppState> {
     this.setState({ currentPage: page }, this.loadPokemons);
   };
 
+  handleErrorClick = () => {
+    this.setState({ throwError: true });
+  };
+
   render() {
-    const { pokemons, currentPage, totalPages } = this.state;
+    const { pokemons, currentPage, totalPages, throwError } = this.state;
+
     return (
       <div className="app">
         <Header />
         <Search onSearch={this.handleSearch} />
-        <CardList pokemons={pokemons} />
+        <ErrorBoundary>
+          <CardList pokemons={throwError ? null : pokemons} />
+        </ErrorBoundary>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={this.handlePageChange}
         />
-        <Footer />
+        <Footer onErrorClick={this.handleErrorClick} />
       </div>
     );
   }

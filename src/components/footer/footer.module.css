@@ -4,4 +4,7 @@
   align-items: center;
   padding: 1rem 0;
   border-top: 1px solid #eaeaea;
+  .errorButton {
+    margin-left: auto;
+  }
 }
