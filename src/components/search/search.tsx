@@ -12,8 +12,12 @@ interface SearchState {
 
 class Search extends Component<SearchProps, SearchState> {
   state: SearchState = {
-    searchTerm: '',
+    searchTerm: localStorage.getItem('searchTerm') || '',
   };
+
+  componentDidMount() {
+    this.props.onSearch(this.state.searchTerm);
+  }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchTerm: event.target.value });
@@ -21,9 +25,8 @@ class Search extends Component<SearchProps, SearchState> {
 
   handleSubmit = () => {
     const { searchTerm } = this.state;
-    if (searchTerm.trim()) {
-      this.props.onSearch(searchTerm);
-    }
+    localStorage.setItem('searchTerm', searchTerm);
+    this.props.onSearch(searchTerm);
   };
 
   render() {
