@@ -31,7 +31,8 @@ class Search extends Component<SearchProps, SearchState> {
 
   render() {
     return (
-      <div className={classes.search}>
+      <fieldset className={classes.search}>
+        <legend>Top controls</legend>
         <input
           type="text"
           value={this.state.searchTerm}
@@ -39,7 +40,7 @@ class Search extends Component<SearchProps, SearchState> {
           placeholder="Search Pokémon..."
         />
         <SearchButton onClick={this.handleSubmit} />
-      </div>
+      </fieldset>
     );
   }
 }

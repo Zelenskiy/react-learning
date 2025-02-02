@@ -8,6 +8,7 @@ interface ErrorBoundaryState {
 
 interface ErrorBoundaryProps {
   children: ReactNode;
+  onReset?: () => void;
 }
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -26,12 +27,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   handleReset = () => {
     this.setState({ hasError: false, errorMessage: null });
+    if (this.props.onReset) {
+      this.props.onReset();
+    }
   };
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className={classes.error}>
+        <div className={classes.main}>
           <h2>Error: {this.state.errorMessage}</h2>
           <button onClick={this.handleReset}>Reset</button>
         </div>

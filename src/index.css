@@ -66,3 +66,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+fieldset {
+  border: 2px solid #eaeaea;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+legend {
+  font-size: 1.2rem;
+  padding: 0 10px;
+}

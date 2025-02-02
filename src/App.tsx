@@ -62,14 +62,18 @@ class App extends Component<object, AppState> {
       <div className="app">
         <Header />
         <Search onSearch={this.handleSearch} />
-        <ErrorBoundary>
-          <CardList pokemons={throwError ? null : pokemons} />
-        </ErrorBoundary>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={this.handlePageChange}
-        />
+        <fieldset>
+          <legend>Results</legend>
+          <ErrorBoundary onReset={() => this.setState({ throwError: false })}>
+            <CardList pokemons={throwError ? null : pokemons} />
+          </ErrorBoundary>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={this.handlePageChange}
+          />
+        </fieldset>
+
         <Footer onErrorClick={this.handleErrorClick} />
       </div>
     );
