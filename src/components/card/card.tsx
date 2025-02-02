@@ -12,14 +12,22 @@ class Card extends Component<CardProps> {
     const pokemonId = pokemon.url.split('/').slice(-2, -1)[0];
 
     return (
-      <div className={classes.card}>
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
-          alt={pokemon.name}
-        />
-        <span>
-          {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-        </span>
+      <div className={classes.card} title="use scrool">
+        <div className={classes.img}>
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
+            alt={pokemon.name}
+          />
+        </div>
+        <div className={classes.descriptionAll}>
+          <span className={classes.name}>
+            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+          </span>
+          <span className={classes.description}>
+            Unfortunately, this API does not have descriptions for collection
+            elements
+          </span>
+        </div>
       </div>
     );
   }
