@@ -66,12 +66,12 @@ class App extends Component<object, AppState> {
           <legend>Results</legend>
           <ErrorBoundary onReset={() => this.setState({ throwError: false })}>
             <CardList pokemons={throwError ? null : pokemons} />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={this.handlePageChange}
+            />
           </ErrorBoundary>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={this.handlePageChange}
-          />
         </fieldset>
 
         <Footer onErrorClick={this.handleErrorClick} />
