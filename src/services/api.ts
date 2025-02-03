@@ -1,3 +1,4 @@
+import { fetchDescription } from './getDescription';
 import { Pokemon } from './types';
 
 interface ApiResponse {
@@ -30,6 +31,13 @@ export const fetchPokemons = async (
 
     const totalPages = Math.ceil(filteredPokemons.length / limit);
     const paginatedPokemons = filteredPokemons.slice(offset, offset + limit);
+    await Promise.all(
+      paginatedPokemons.map(async (pokemon) => {
+        const { height, weight } = await fetchDescription(pokemon.name);
+        pokemon.height = height;
+        pokemon.weight = weight;
+      })
+    );
 
     return { pokemons: paginatedPokemons, totalPages };
   } catch (error) {

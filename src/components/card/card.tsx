@@ -24,8 +24,7 @@ class Card extends Component<CardProps> {
             {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
           </span>
           <span className={classes.description}>
-            Unfortunately, this API does not have descriptions for collection
-            elements
+            Height: {pokemon.height}, Weight: {pokemon.weight}
           </span>
         </div>
       </div>

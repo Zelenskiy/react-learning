@@ -36,7 +36,6 @@ class App extends Component<object, AppState> {
     const { searchTerm, currentPage } = this.state;
     this.setState({ isLoading: true });
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       const { pokemons, totalPages } = await fetchPokemons(
         searchTerm,
         currentPage
