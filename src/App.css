@@ -14,3 +14,11 @@ h2 {
   margin-bottom: 0;
   font-weight: normal;
 }
+
+.app {
+  height: 614px;
+}
+
+.results {
+  height: 452px;
+}

@@ -8,13 +8,14 @@ import CardList from './components/cardlist/cardlist';
 import Search from './components/search/search';
 import { Footer } from './components/footer/footer';
 import ErrorBoundary from './components/errorboundary/errorBoundary';
-
+import Loader from './components/loader/loder';
 interface AppState {
   searchTerm: string;
   pokemons: Pokemon[];
   currentPage: number;
   totalPages: number;
   throwError: boolean;
+  isLoading: boolean;
 }
 
 class App extends Component<object, AppState> {
@@ -24,6 +25,7 @@ class App extends Component<object, AppState> {
     currentPage: 1,
     totalPages: 1,
     throwError: false,
+    isLoading: false,
   };
 
   componentDidMount() {
@@ -32,14 +34,17 @@ class App extends Component<object, AppState> {
 
   loadPokemons = async () => {
     const { searchTerm, currentPage } = this.state;
+    this.setState({ isLoading: true });
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const { pokemons, totalPages } = await fetchPokemons(
         searchTerm,
         currentPage
       );
-      this.setState({ pokemons, totalPages });
+      this.setState({ pokemons, totalPages, isLoading: false });
     } catch (error) {
       console.error('Error fetching Pokémon data:', error);
+      this.setState({ isLoading: false });
     }
   };
 
@@ -56,21 +61,28 @@ class App extends Component<object, AppState> {
   };
 
   render() {
-    const { pokemons, currentPage, totalPages, throwError } = this.state;
+    const { pokemons, currentPage, totalPages, throwError, isLoading } =
+      this.state;
 
     return (
       <div className="app">
         <Header />
         <Search onSearch={this.handleSearch} />
-        <fieldset>
+        <fieldset className="results">
           <legend>Results</legend>
           <ErrorBoundary onReset={() => this.setState({ throwError: false })}>
-            <CardList pokemons={throwError ? null : pokemons} />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={this.handlePageChange}
-            />
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <>
+                <CardList pokemons={throwError ? null : pokemons} />
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={this.handlePageChange}
+                />
+              </>
+            )}
           </ErrorBoundary>
         </fieldset>
 
