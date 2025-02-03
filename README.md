@@ -1,1 +1,2 @@
-# react-learning
+react-learning
+by Oleksandr Zelenskiy
