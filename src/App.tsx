@@ -1,4 +1,6 @@
-import { Component } from 'react';
+/* eslint-disable react-compiler/react-compiler */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react';
 import './App.css';
 import { Header } from './components/header/header';
 import { Pokemon } from './services/types';
@@ -9,86 +11,72 @@ import Search from './components/search/search';
 import { Footer } from './components/footer/footer';
 import ErrorBoundary from './components/errorboundary/errorBoundary';
 import Loader from './components/loader/loder';
-interface AppState {
-  searchTerm: string;
-  pokemons: Pokemon[];
-  currentPage: number;
-  totalPages: number;
-  throwError: boolean;
-  isLoading: boolean;
-}
 
-class App extends Component<object, AppState> {
-  state: AppState = {
-    searchTerm: '',
-    pokemons: [],
-    currentPage: 1,
-    totalPages: 1,
-    throwError: false,
-    isLoading: false,
-  };
+const App = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [throwError, setThrowError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  componentDidMount() {
-    this.loadPokemons();
-  }
+  useEffect(() => {
+    loadPokemons();
+  }, [searchTerm, currentPage]);
 
-  loadPokemons = async () => {
-    const { searchTerm, currentPage } = this.state;
-    this.setState({ isLoading: true });
+  const loadPokemons = async () => {
+    setIsLoading(true);
     try {
       const { pokemons, totalPages } = await fetchPokemons(
         searchTerm,
         currentPage
       );
-      this.setState({ pokemons, totalPages, isLoading: false });
+      setPokemons(pokemons);
+      setTotalPages(totalPages);
     } catch (error) {
       console.error('Error fetching Pokémon data:', error);
-      this.setState({ isLoading: false });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  handleSearch = (term: string) => {
-    this.setState({ searchTerm: term, currentPage: 1 }, this.loadPokemons);
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    setCurrentPage(1);
   };
 
-  handlePageChange = (page: number) => {
-    this.setState({ currentPage: page }, this.loadPokemons);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
-  handleErrorClick = () => {
-    this.setState({ throwError: true });
+  const handleErrorClick = () => {
+    setThrowError(true);
   };
 
-  render() {
-    const { pokemons, currentPage, totalPages, throwError, isLoading } =
-      this.state;
-
-    return (
-      <div className="app">
-        <Header />
-        <Search onSearch={this.handleSearch} />
-        <fieldset className="results">
-          <legend>Results</legend>
-          <ErrorBoundary onReset={() => this.setState({ throwError: false })}>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <>
-                <CardList pokemons={throwError ? null : pokemons} />
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={this.handlePageChange}
-                />
-              </>
-            )}
-          </ErrorBoundary>
-        </fieldset>
-
-        <Footer onErrorClick={this.handleErrorClick} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="app">
+      <Header />
+      <Search onSearch={handleSearch} />
+      <fieldset className="results">
+        <legend>Results</legend>
+        <ErrorBoundary onReset={() => setThrowError(false)}>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <CardList pokemons={throwError ? null : pokemons} />
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </>
+          )}
+        </ErrorBoundary>
+      </fieldset>
+      <Footer onErrorClick={handleErrorClick} />
+    </div>
+  );
+};
 
 export default App;
