@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+/* eslint-disable react-compiler/react-compiler */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import SearchButton from '../search-button/search-button';
 import classes from './search.module.css';
 
@@ -6,43 +8,36 @@ interface SearchProps {
   onSearch: (term: string) => void;
 }
 
-interface SearchState {
-  searchTerm: string;
-}
+const Search: React.FC<SearchProps> = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem('searchTerm') || ''
+  );
 
-class Search extends Component<SearchProps, SearchState> {
-  state: SearchState = {
-    searchTerm: localStorage.getItem('searchTerm') || '',
+  useEffect(() => {
+    onSearch(searchTerm);
+  }, []);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
-  componentDidMount() {
-    this.props.onSearch(this.state.searchTerm);
-  }
-
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchTerm: event.target.value });
-  };
-
-  handleSubmit = () => {
-    const { searchTerm } = this.state;
+  const handleSubmit = () => {
     localStorage.setItem('searchTerm', searchTerm);
-    this.props.onSearch(searchTerm);
+    onSearch(searchTerm);
   };
 
-  render() {
-    return (
-      <fieldset className={classes.search}>
-        <legend>Top controls</legend>
-        <input
-          type="text"
-          value={this.state.searchTerm}
-          onChange={this.handleChange}
-          placeholder="Search Pokémon..."
-        />
-        <SearchButton onClick={this.handleSubmit} />
-      </fieldset>
-    );
-  }
-}
+  return (
+    <fieldset className={classes.search}>
+      <legend>Top controls</legend>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleChange}
+        placeholder="Search Pokémon..."
+      />
+      <SearchButton onClick={handleSubmit} />
+    </fieldset>
+  );
+};
 
 export default Search;

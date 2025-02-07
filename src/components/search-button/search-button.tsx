@@ -1,13 +1,11 @@
-import { Component } from 'react';
+import React from 'react';
 
 interface SearchButtonProps {
   onClick: () => void;
 }
 
-class SearchButton extends Component<SearchButtonProps> {
-  render() {
-    return <button onClick={this.props.onClick}>Search</button>;
-  }
-}
+const SearchButton: React.FC<SearchButtonProps> = ({ onClick }) => {
+  return <button onClick={onClick}>Search</button>;
+};
 
 export default SearchButton;

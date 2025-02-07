@@ -2,15 +2,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Header } from './components/header/header';
 import { Pokemon } from './services/types';
 import { fetchPokemons } from './services/api';
 import Pagination from './components/pagination/pagination';
 import CardList from './components/cardlist/cardlist';
 import Search from './components/search/search';
-import { Footer } from './components/footer/footer';
 import ErrorBoundary from './components/errorboundary/errorBoundary';
 import Loader from './components/loader/loder';
+import Footer from './components/footer/footer';
+import Header from './components/header/header';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
