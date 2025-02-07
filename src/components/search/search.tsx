@@ -1,28 +1,24 @@
-/* eslint-disable react-compiler/react-compiler */
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import SearchButton from '../search-button/search-button';
 import classes from './search.module.css';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 interface SearchProps {
   onSearch: (term: string) => void;
 }
 
 const Search: React.FC<SearchProps> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState(
-    localStorage.getItem('searchTerm') || ''
-  );
+  const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm', '');
 
   useEffect(() => {
     onSearch(searchTerm);
-  }, []);
+  }, [searchTerm, onSearch]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
   const handleSubmit = () => {
-    localStorage.setItem('searchTerm', searchTerm);
     onSearch(searchTerm);
   };
 
