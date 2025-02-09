@@ -2,7 +2,7 @@ import * as classes from './loader.module.css';
 
 function Loader() {
   return (
-    <div className={classes.loader}>
+    <div className={classes.loader} role="loader">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.0"

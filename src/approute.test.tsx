@@ -1,10 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, test, expect, vi } from 'vitest';
-import '@testing-library/jest-dom'; // Додає підтримку toBeInTheDocument()
+import '@testing-library/jest-dom';
 import AppRoutes from './AppRoutes';
 
-// Мокаємо компоненти MainPage і NoFound
 vi.mock('./mainpage/MainPage', () => ({
   default: () => <div>Main Page</div>,
 }));

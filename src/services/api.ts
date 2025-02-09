@@ -45,3 +45,26 @@ export const fetchPokemons = async (
     return { pokemons: [], totalPages: 1 };
   }
 };
+
+export const fetchPokemonByName = async (
+  name: string
+): Promise<Pokemon | null> => {
+  try {
+    const { pokemons } = await fetchPokemons('', 1);
+    const pokemon = pokemons.find(
+      (pokemon) => pokemon.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (pokemon) {
+      const { height, weight } = await fetchDescription(pokemon.name);
+      pokemon.height = height;
+      pokemon.weight = weight;
+      return pokemon;
+    }
+
+    return null;
+  } catch (error) {
+    console.error('Error fetching Pokémon by name:', error);
+    return null;
+  }
+};
