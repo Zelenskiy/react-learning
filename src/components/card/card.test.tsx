@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { Pokemon } from '../../../services/types';
 import '@testing-library/jest-dom';
 import Card from './card';
+import { Pokemon } from '../../services/types';
 
 describe('Card Component', () => {
   const mockPokemon: Pokemon = {

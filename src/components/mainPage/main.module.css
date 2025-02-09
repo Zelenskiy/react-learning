@@ -6,7 +6,8 @@
   margin: 0 auto;
   /* max-width: 900px; */
   min-width: 560px;
-  width: 80%;
+  width: 90%;
+
   height: 85vh;
   margin: 0 40px;
   padding: 10px;
@@ -16,7 +17,18 @@
 
 }
 
+.result {
+  display: flex;
+  gap: 10px;
+  min-height: 82vh;
+  width: 250px;
+}
 .central {
   display: flex;
   gap: 10px;
+  min-height: 82vh;
+}
+
+.aside {
+  width: 300px;
 }

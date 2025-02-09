@@ -9,13 +9,13 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ pokemon, handleClick }) => {
   return (
-    <div className={classes.card}>
+    <div
+      className={classes.card}
+      onClick={() => handleClick(pokemon)}
+      role="listitem"
+    >
       <div className={classes.img}>
-        <div
-          className={classes.descriptionAll}
-          onClick={() => handleClick(pokemon)}
-          role="listitem"
-        >
+        <div className={classes.descriptionAll}>
           <span className={classes.name}>
             {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
           </span>
