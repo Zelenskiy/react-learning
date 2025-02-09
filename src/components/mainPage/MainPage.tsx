@@ -1,3 +1,5 @@
+/* eslint-disable react-compiler/react-compiler */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import classes from './main.module.css';
 import { Pokemon } from '../../services/types';
