@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "format:fix": "prettier --write .",
     "prepare": "husky",
-    "test": "vitest",
+    "test": "vitest run",
     "test:coverage": "vitest --coverage",
     "test:watch": "vitest --watch"
   },

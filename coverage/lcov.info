@@ -1,5 +1,5 @@
 TN:
-SF:src/AppRoutes.tsx
+SF:src\AppRoutes.tsx
 FN:5,AppRoutes
 FNF:1
 FNH:0
@@ -11,7 +11,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/MainPage.tsx
+SF:src\MainPage.tsx
 FN:15,(anonymous_0)
 FN:23,(anonymous_1)
 FN:27,(anonymous_2)
@@ -64,7 +64,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:src/main.tsx
+SF:src\main.tsx
 FNF:0
 FNH:0
 DA:7,0
@@ -74,7 +74,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/card/card.tsx
+SF:src\components\card\card.tsx
 FN:9,(anonymous_0)
 FNF:1
 FNH:0
@@ -88,7 +88,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/cardlist/cardlist.tsx
+SF:src\components\cardlist\cardlist.tsx
 FN:10,(anonymous_0)
 FN:18,(anonymous_1)
 FNF:2
@@ -110,7 +110,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:src/components/errorboundary/errorBoundary.tsx
+SF:src\components\errorboundary\errorBoundary.tsx
 FN:14,(anonymous_0)
 FN:28,(anonymous_1)
 FN:20,(anonymous_2)
@@ -144,7 +144,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:src/components/footer/footer.tsx
+SF:src\components\footer\footer.tsx
 FN:8,(anonymous_0)
 FNF:1
 FNH:0
@@ -157,7 +157,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/header/header.tsx
+SF:src\components\header\header.tsx
 FN:3,(anonymous_0)
 FNF:1
 FNH:0
@@ -170,7 +170,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/loader/loder.tsx
+SF:src\components\loader\loder.tsx
 FN:3,Loader
 FNF:1
 FNH:0
@@ -182,7 +182,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/nofound/nofound.tsx
+SF:src\components\nofound\nofound.tsx
 FN:1,(anonymous_0)
 FNF:1
 FNH:0
@@ -195,7 +195,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/pagination/pagination.tsx
+SF:src\components\pagination\pagination.tsx
 FN:10,(anonymous_0)
 FN:15,(anonymous_1)
 FN:21,(anonymous_2)
@@ -222,7 +222,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:src/components/search/search.tsx
+SF:src\components\search\search.tsx
 FN:10,(anonymous_0)
 FN:13,(anonymous_1)
 FN:17,(anonymous_2)
@@ -248,7 +248,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/search-button/search-button.tsx
+SF:src\components\search-button\search-button.tsx
 FN:7,(anonymous_0)
 FNF:1
 FNH:1
