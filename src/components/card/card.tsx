@@ -14,6 +14,7 @@ const Card: React.FC<CardProps> = ({ pokemon, handleClick }) => {
         <div
           className={classes.descriptionAll}
           onClick={() => handleClick(pokemon)}
+          role="listitem"
         >
           <span className={classes.name}>
             {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}

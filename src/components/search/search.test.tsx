@@ -1,35 +1,36 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { vi } from 'vitest';
+import { describe, it, vi, beforeEach, expect } from 'vitest';
 import Search from './search';
-import '@testing-library/jest-dom';
 
-describe('Search Component', () => {
-  it('renders input and button', () => {
-    render(<Search onSearch={() => {}} />);
-    expect(
-      screen.getByPlaceholderText('Search Pokémon...')
-    ).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeInTheDocument();
+describe('Search component', () => {
+  const mockOnSearch = vi.fn();
+
+  beforeEach(() => {
+    localStorage.clear();
+    vi.restoreAllMocks();
   });
 
-  it('updates input value on change', () => {
-    render(<Search onSearch={() => {}} />);
-    const input = screen.getByPlaceholderText(
-      'Search Pokémon...'
-    ) as HTMLInputElement;
-    fireEvent.change(input, { target: { value: 'Pikachu' } });
-    expect(input.value).toBe('Pikachu');
-  });
+  it('retrieves the value from local storage on mount', () => {
+    localStorage.setItem('searchTerm', JSON.stringify('Pikachu'));
 
-  it('calls onSearch with the correct term on button click', () => {
-    const mockOnSearch = vi.fn();
     render(<Search onSearch={mockOnSearch} />);
-    const input = screen.getByPlaceholderText(
-      'Search Pokémon...'
-    ) as HTMLInputElement;
-    fireEvent.change(input, { target: { value: 'Charmander' } });
 
-    fireEvent.click(screen.getByRole('button'));
-    expect(mockOnSearch).toHaveBeenCalledWith('Charmander');
+    const input = screen.getByPlaceholderText('Search Pokémon...');
+    expect(input).toHaveValue('Pikachu');
+  });
+
+  it('saves the entered value in local storage when the search button is clicked', () => {
+    render(<Search onSearch={mockOnSearch} />);
+
+    const input = screen.getByPlaceholderText('Search Pokémon...');
+    const button = screen.getByRole('button');
+
+    fireEvent.change(input, { target: { value: 'bulbasaur' } });
+    fireEvent.click(button);
+
+    expect(localStorage.getItem('searchTerm')).toBe(
+      JSON.stringify('bulbasaur')
+    );
+    expect(mockOnSearch).toHaveBeenCalledWith('bulbasaur');
   });
 });
