@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from '@testing-library/react';
 import { vi, Mock } from 'vitest';
 import { Pokemon } from '../../services/types';
 import { fetchDescription } from '../../services/getDescription';
@@ -55,7 +61,11 @@ describe('Details component', () => {
     render(<Details pokemon={mockPokemon} setPokemon={mockSetPokemon} />);
 
     const closeButton = screen.getByRole('button');
-    fireEvent.click(closeButton);
+
+    await act(async () => {
+      fireEvent.click(closeButton);
+    });
+
     expect(mockSetPokemon).toHaveBeenCalledWith(null);
   });
 });
