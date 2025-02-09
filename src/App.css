@@ -1,7 +1,4 @@
 #root {
-  /* max-width: 750px; */
-  width: 70%;
-  /* height: calc(100vh - 8rem); */
   margin: 0 auto;
   padding: 10px;
   text-align: center;
@@ -13,12 +10,4 @@ h2 {
   margin-top: 0;
   margin-bottom: 0;
   font-weight: normal;
-}
-/* 
-.app {
-  height: 624px;
-} */
-
-.results {
-  height: 452px;
 }

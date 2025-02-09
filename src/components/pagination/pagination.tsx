@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import classes from './pagination.module.css';
+import PropTypes from 'prop-types';
 
 interface PaginationProps {
   currentPage: number;
@@ -30,13 +30,18 @@ const Pagination: React.FC<PaginationProps> = ({
         Prev
       </button>
       <span>
-        Page {currentPage} of {totalPages}
+        {currentPage} of {totalPages}
       </span>
       <button onClick={handleNext} disabled={currentPage === totalPages}>
         Next
       </button>
     </div>
   );
+};
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
 };
 
 export default Pagination;
