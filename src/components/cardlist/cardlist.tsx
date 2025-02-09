@@ -5,9 +5,10 @@ import classes from './cardlist.module.css';
 
 interface CardListProps {
   pokemons: Pokemon[] | null;
+  handleClick: (pokemon: Pokemon) => void;
 }
 
-const CardList: React.FC<CardListProps> = ({ pokemons }) => {
+const CardList: React.FC<CardListProps> = ({ pokemons, handleClick }) => {
   if (!pokemons) {
     throw new Error('Failed to load Pokémon list');
   }
@@ -15,7 +16,13 @@ const CardList: React.FC<CardListProps> = ({ pokemons }) => {
   return (
     <div className={classes.main}>
       {pokemons.length > 0 ? (
-        pokemons.map((pokemon) => <Card key={pokemon.name} pokemon={pokemon} />)
+        pokemons.map((pokemon) => (
+          <Card
+            key={pokemon.name}
+            pokemon={pokemon}
+            handleClick={handleClick}
+          />
+        ))
       ) : (
         <p>No Pokémon found.</p>
       )}

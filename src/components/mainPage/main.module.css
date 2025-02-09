@@ -1,0 +1,16 @@
+.app { 
+  margin: 0 auto;
+  max-width: 900px;
+  min-width: 560px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #eaeaea;
+  border-radius: 0.5rem;
+}
+
+.central {
+  display: flex;
+  gap: 10px;
+}

@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router';
-import MainPage from './MainPage';
+import MainPage from './components/mainPage/MainPage';
 import NoFound from './components/nofound/nofound';
 
 function AppRoutes() {
