@@ -51,6 +51,7 @@ const Details: React.FC<DetailsProps> = ({ pokemon, setPokemon }) => {
   const pokemonId = pokemon.url.split('/').slice(-2, -1)[0];
   function handleClose(): void {
     setPokemon(null);
+    console.log(location.pathname);
     navigate(location.pathname);
   }
 
